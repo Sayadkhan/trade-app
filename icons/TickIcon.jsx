@@ -13,7 +13,7 @@ function TickIcon() {
       <path
         d="M11.3327 5.91699L9.08657 8.61233C8.19651 9.6804 7.75148 10.2144 7.16602 10.2144C6.58055 10.2144 6.13552 9.6804 5.24546 8.61233L4.66602 7.91699"
         stroke="black"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         strokeLinecap="round"
       />
     </svg>

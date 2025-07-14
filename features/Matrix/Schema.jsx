@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import MatrixEnrollInfromation from './components/MatrixEnrollInfromation';
-import InvestNowCard from './components/InvestNowCard';
+
 import LevelCommissions from './components/LevelCommissions';
 // import useMatrix from '@/hooks/useMatrix';
 import Loader from '@/components/Loader';
@@ -11,6 +11,7 @@ import Loader from '@/components/Loader';
 import useDebounce from '@/hooks/useDebounce';
 import useMatrix from '@/hooks/useMatrix';
 import { getDateValues } from '@/utils';
+import InvestNowCard from './components/InvestNowCard';
 
 const options = [
   { value: '1', label: 'Initiated' },
@@ -64,15 +65,17 @@ function Schema() {
 
   const { data, isLoading, isSuccess, isFetching } = useMatrix({ params });
 
+  console.log('Matrix Data:', data);
+
   if (isLoading || !isSuccess) {
     return <Loader />;
   }
 
   return (
     <div className="space-y-2">
-      {data.matrix_log && <MatrixEnrollInfromation log={data.matrix_log} />}
+      {data?.matrix_log && <MatrixEnrollInfromation log={data?.matrix_log} />}
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
-        {data.plans.map((plan, index) => (
+        {data?.plans?.map((plan, index) => (
           <InvestNowCard key={index} plan={plan} />
         ))}
       </div>

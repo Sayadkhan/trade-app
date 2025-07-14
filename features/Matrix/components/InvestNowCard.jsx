@@ -4,14 +4,12 @@ import React, { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 
-
-
-
-
 import { formatToOneDecimal } from '@/utils';
 import useGlobalSettings from '@/hooks/useGlobalSettings';
 import Toaster from '@/components/Toaster';
 import { createMatrix } from '@/actions/matrix';
+import Button from '@/components/Button';
+import TickIcon from '@/icons/TickIcon';
 
 function InvestNowCard({ plan }) {
   const queryClient = useQueryClient();
