@@ -15,8 +15,6 @@ import HistoryViewCard from '@/components/HistoryViewCard';
 import Loader from '@/components/Loader';
 import { cn } from '@/utils';
 
-
-
 const CardInfo = [
   {
     link: '/trades-history?tab=0',
@@ -56,9 +54,7 @@ function Trades() {
     return <Loader />;
   }
 
-
-
-  const BlockTableData = trades?.crypto_currenc?.map((item, index) => (
+  const BlockTableData = trades?.crypto_currency?.map((item, index) => (
     <Table.BlockRow
       key={index}
       data={{
@@ -92,6 +88,7 @@ function Trades() {
       </div>
 
       <Card>
+        {/* Desktop Table View */}
         <div className="overflow-x-auto md:block hidden">
           <Table>
             <Table.Header>
@@ -112,14 +109,16 @@ function Trades() {
 
             {trades.crypto_currency.map((item, index) => (
               <Table.Row
-                className={cn({
-                  'border-b border-[#FFFFFF12] text-black':
-                    trades.crypto_currency.length !== index + 1,
-                })}
                 key={index}
+                className={cn(
+                  'text-black',
+                  trades.crypto_currency.length !== index + 1
+                    ? 'border-b border-gray-200'
+                    : ''
+                )}
               >
                 <Table.Column>
-                  <div className="flex items-center  gap-3">
+                  <div className="flex items-center gap-3">
                     <p>{trades.crypto_currency_meta.from + index}</p>
                     <Image
                       src={item.file}
@@ -130,10 +129,8 @@ function Trades() {
                       priority
                     />
                     <div>
-                      <p className="text-base dark:text-white ">
-                        {item.name}
-                      </p>
-                      <p className="text-[#A1A1A1] text-xs leading-4">
+                      <p className="text-base text-black">{item.name}</p>
+                      <p className="text-xs text-gray-500 leading-4">
                         {item.pair}
                       </p>
                     </div>
@@ -163,14 +160,18 @@ function Trades() {
           </Table>
         </div>
 
+        {/* Mobile Card View */}
         <div className="block md:hidden">
           {trades?.crypto_currency?.length ? (
             BlockTableData
           ) : (
-            <p className="text-center text-bold">No data available</p>
+            <p className="text-center font-bold text-gray-600">
+              No data available
+            </p>
           )}
         </div>
 
+        {/* Pagination */}
         {currentPage === 1 &&
         !trades?.crypto_currency_meta?.next_page_url ? null : (
           <Paginator

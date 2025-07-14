@@ -7,28 +7,21 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { HiDotsHorizontal } from "react-icons/hi";
 
-// Card data
-const cards = [
-  {
-    id: 1,
-    image: "/cards/image_1.jpg",
-    number: "1234 5678 1234 5661",
-    expiry: "08 / 25",
-    balance: "$10,250.00",
-    label: "Savings Account",
-  },
-  {
-    id: 2,
-    image: "/cards/image_2.jpg",
-    number: "9876 5432 1098 7654",
-    expiry: "11 / 26",
-    balance: "$5,250.00",
-    label: "Business Account",
-  },
-];
-
-export default function Slider() {
+export default function Slider({ data }) {
   const [balances, setBalances] = useState({});
+
+  const depositData = data?.deposit || {};
+
+  const cards = Object.entries(depositData)
+    .filter(([key]) => key !== "total")
+    .map(([key, value], index) => ({
+      id: index + 1,
+      image: `/cards/image_${index + 1}.jpg`,
+      number: "•••• •••• •••• ••••",
+      expiry: "N/A",
+      balance: `$${value.amount}`,
+      label: `${key.charAt(0).toUpperCase() + key.slice(1)} Account`,
+    }));
 
   const toggleBalance = (id) => {
     setBalances((prev) => ({
@@ -72,7 +65,6 @@ export default function Slider() {
                     className="bg-white text-black px-4 py-2 rounded shadow text-xs font-medium z-30 relative flex items-center gap-2 transition-all duration-300"
                   >
                     <span>{isOpen ? "Hide Balance" : "Click for Balance"}</span>
-
                     <span
                       className={`overflow-hidden whitespace-nowrap transition-all duration-500 ease-in-out text-sm font-semibold ${
                         isOpen

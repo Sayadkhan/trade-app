@@ -13,9 +13,20 @@ import SendMoney from "@/components/sendMoney";
 import { useState } from "react";
 import TransferModal from "@/components/TransferModal/TransferModal";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import fetchDashboard from "@/actions/dashboard";
+import Market from "@/features/Market";
 
 export default function Home() {
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
+
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ["dashboard"],
+    queryFn: fetchDashboard,
+  });
+
+  console.log(data?.cash_flow_statistics);
+
   const actions = [
     {
       id: 1,
@@ -32,9 +43,9 @@ export default function Home() {
     },
     {
       id: 3,
-      label: "Communication",
+      label: "Matrix",
       icon: <RiExchangeFundsLine size={48} className="text-blue-500" />,
-      link: "/communication",
+      link: "/matrix",
     },
     {
       id: 4,
@@ -48,7 +59,7 @@ export default function Home() {
       <div className="relative bg-gradient-to-b from-blue-500 via-blue-600 to-blue-700 text-white pb-[60px] ">
         <Navbar />
         <div className="wrapper">
-          <Slider />
+          <Slider data={data?.cash_flow_statistics} />
         </div>
 
         {/* Concave curve at the bottom */}
@@ -102,8 +113,8 @@ export default function Home() {
       </div>
 
       {/* Recent Activity  */}
-      <div>
-        <RecentActivity />
+      <div className="wrapper mt-10">
+        <Market />
       </div>
 
       {/* send Money */}

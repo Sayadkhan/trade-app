@@ -6,10 +6,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 
 
-import { userSchema } from '@/schema/user';
-import { useUser } from '@/components/Provider/UserProvider';
+
+
 import Toaster from '@/components/Toaster';
 import { userUpdate } from '@/actions/User';
+import { userSchema } from '@/schema/user';
+import { useUser } from '@/components/providers/UserProvider';
 
 function Profile() {
   const userInfo = useUser();

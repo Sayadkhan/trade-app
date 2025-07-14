@@ -9,7 +9,7 @@ const page = () => {
         <Navbar/>
       </div>
   <div>
-    {/* <Profile/> */}
+    <Profile/>
   </div>
     </div>
   )

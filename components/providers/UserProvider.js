@@ -5,9 +5,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useTheme } from "next-themes";
 
 import useGlobalSettings from "@/hooks/useGlobalSettings";
-import { useFavicon } from "@/hooks/useFavicon";
+
 import Logo from "@/icons/Logo";
 import { fetchUser } from "@/actions/User";
+import { useFavicon } from "@/hooks/useFavicon";
 
 const UserContext = createContext(undefined);
 
