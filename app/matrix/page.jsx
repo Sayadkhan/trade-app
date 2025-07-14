@@ -1,4 +1,5 @@
 import Navbar from '@/components/navbar/navbar'
+import Schema from '@/features/Matrix/Schema';
 import React from 'react'
 
 export const metadata = {
@@ -13,7 +14,7 @@ const page = () => {
     },
     {
       label: 'Referral Rewards',
-      content: <ReferralRewards />,
+      // content: <ReferralRewards />,
     },
   ];
   return (
